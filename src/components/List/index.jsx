@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import categoryData from "../../data/category.data";
+import { useContext } from "react";
+import { TodoAppContext } from "../../contexts/todo-app-context";
 
-const List = ({
-  todoList,
-  categorys,
-  toggleTodoComplete,
-  handleDeleteClick,
-}) => {
+const List = () => {
+  const { categorys, todo, toggleTodoComplete } = useContext(TodoAppContext);
   const [searchType, setSearchType] = useState("");
   const [searchWord, setSearchWord] = useState("");
 
@@ -18,7 +16,7 @@ const List = ({
     };
   }, {});
 
-  let searchList = todoList;
+  let searchList = todo.filter(item=>!item.done);
   if (searchType !== "") {
     searchList = searchList.filter((item) => item.category === searchType);
   }
@@ -82,7 +80,7 @@ const List = ({
               <Link
                 to="#"
                 onClick={() => {
-                  handleDeleteClick(todo.id, "todo");
+                  //handleDeleteClick(todo.id, "todo");
                 }}
               >
                 <i className="fa-solid fa-trash-can"></i>

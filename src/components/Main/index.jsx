@@ -9,17 +9,15 @@ import Done from "../Done";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 export default function Main({
-  todoList,
-  addTodo,
-  updateTodoList,
-  toggleTodoComplete,
-  clearCompleteTodo,
-  addCategory,
-  categorys,
-  handleDeleteClick,
+  // todoList,
+  // addTodo,
+  // updateTodoList,
+  // toggleTodoComplete,
+  // clearCompleteTodo,
+  // addCategory,
+  // handleDeleteClick,
 }) {
   const location = useLocation();
-
   return (
     <div className="wrapper">
       <header>Todo App</header>
@@ -61,17 +59,14 @@ export default function Main({
       </nav>
       <main>
         <Routes>
-          <Route
-            path="/"
-            element={<Home addTodo={addTodo} categorys={categorys}></Home>}
-          ></Route>
+          <Route path="/" element={<Home></Home>}></Route>
           <Route
             path="Edit/:id"
             element={
               <Edit
-                categorys={categorys}
-                todoList={todoList}
-                updateTodoList={updateTodoList}
+                //categorys={categorys}
+                //todoList={todoList}
+                //updateTodoList={updateTodoList}
               ></Edit>
             }
           ></Route>
@@ -79,10 +74,9 @@ export default function Main({
             path="List"
             element={
               <List
-                categorys={categorys}
-                todoList={todoList.filter((item) => !item.done)}
-                toggleTodoComplete={toggleTodoComplete}
-                handleDeleteClick={handleDeleteClick}
+                //todoList={todoList.filter((item) => !item.done)}
+                //toggleTodoComplete={toggleTodoComplete}
+                //handleDeleteClick={handleDeleteClick}
               ></List>
             }
           ></Route>
@@ -90,9 +84,9 @@ export default function Main({
             path="Done"
             element={
               <Done
-                completeList={todoList.filter((item) => item.done)}
-                toggleTodoComplete={toggleTodoComplete}
-                clearCompleteTodo={clearCompleteTodo}
+                // completeList={todoList.filter((item) => item.done)}
+                // toggleTodoComplete={toggleTodoComplete}
+                // clearCompleteTodo={clearCompleteTodo}
               ></Done>
             }
           ></Route>
@@ -100,9 +94,9 @@ export default function Main({
             path="Category"
             element={
               <Category
-                categorys={categorys}
-                addCategory={addCategory}
-                handleDeleteClick={handleDeleteClick}
+                //categorys={categorys}
+                //addCategory={addCategory}
+                //handleDeleteClick={handleDeleteClick}
               ></Category>
             }
           ></Route>

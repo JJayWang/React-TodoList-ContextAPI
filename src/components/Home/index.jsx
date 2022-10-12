@@ -1,12 +1,9 @@
 import React from "react";
 import Form from "../Form";
 
-const Home = ({ addTodo, categorys }) => {
-  const handleSubmitData = (todoData) => {
-    addTodo(todoData);
-  };
+const Home = () => {
   return (
-    <Form categorys={categorys} handleSubmitData={handleSubmitData}></Form>
+    <Form></Form>
   );
 };
 

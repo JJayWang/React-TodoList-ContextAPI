@@ -1,6 +1,10 @@
 import React from "react";
-
-const Done = ({ completeList, toggleTodoComplete, clearCompleteTodo }) => {
+import { useContext } from "react";
+import { TodoAppContext } from "../../contexts/todo-app-context";
+//{ completeList, toggleTodoComplete, clearCompleteTodo }
+const Done = () => {
+  const { toggleTodoComplete, todo } = useContext(TodoAppContext);
+  const completeList = todo.filter((item) => item.done);
   return (
     <div className="todo-item todo-done">
       <ul className="list-container">
@@ -21,7 +25,7 @@ const Done = ({ completeList, toggleTodoComplete, clearCompleteTodo }) => {
       <button
         className="todo-btn"
         onClick={() => {
-          clearCompleteTodo();
+          //clearCompleteTodo();
         }}
       >
         Clear

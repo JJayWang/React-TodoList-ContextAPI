@@ -1,25 +1,31 @@
 import React, { useState } from "react";
 import { categoryDefault } from "../../data/category.data";
+import { useContext } from "react";
+import { TodoAppContext } from "../../contexts/todo-app-context";
+import { toast } from "react-toastify";
 
-const Form = ({ categorys, todoData, handleSubmitData }) => {
+const Form = ({ todoData, handleSubmitData }) => {
+  const { categorys, todo, editID, modifyTodo } = useContext(TodoAppContext);
+  console.log(todo);
+
+  let contentData = "";
+
   const now = new Date();
-
   const parseMonth = now.getMonth() + 1;
   const parseDay = now.getDate();
   let dateData = `${now.getFullYear()}-${
     parseMonth < 10 ? `0${parseMonth}` : parseMonth
   }-${parseDay < 10 ? `0${parseDay}` : parseDay}`;
 
-  console.log(dateData);
-
   let categoryData = categoryDefault;
-  let contentData = "";
-  let id = "";
-  if (todoData) {
-    dateData = todoData.date;
-    categoryData = todoData.category;
-    contentData = todoData.content;
-    id = todoData.id;
+
+  if (editID !== "" && todo) {
+    const selectedTodo = todo.find((item) => item.id === editID);
+    if (selectedTodo) {
+      dateData = selectedTodo.date;
+      categoryData = selectedTodo.category;
+      contentData = selectedTodo.content;
+    }
   }
 
   const [date, setDate] = useState(dateData);
@@ -28,15 +34,27 @@ const Form = ({ categorys, todoData, handleSubmitData }) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    handleSubmitData({
-      id,
-      date,
-      category,
-      content,
-    });
-    setDate(dateData);
-    setCategory(categoryDefault);
-    setContent("");
+    if (content !== "") {
+      modifyTodo({
+        date,
+        category,
+        content,
+      });
+
+      setDate(dateData);
+      setCategory(categoryDefault);
+      setContent("");
+
+      toast.success("Success");
+    } else {
+      toast.warn("Please enter your todo");
+    }
+
+    // handleSubmitData({
+    //   date,
+    //   category,
+    //   content,
+    // });
   };
 
   return (
