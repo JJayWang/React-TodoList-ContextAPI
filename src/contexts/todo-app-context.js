@@ -45,6 +45,18 @@ export const TodoAppContextProvider = ({ children }) => {
     dispatch({ type: "toggleTodoComplete", payload: id });
   };
 
+  const clearCompleteTodo = () => {
+    dispatch({ type: "clearCompleteTodo" });
+  };
+
+  const deleteTodo = (id) => {
+    dispatch({ type: "deleteTodo", payload: id });
+  };
+
+  const registerEditID = (id) => {
+    dispatch({ type: "registerEditID", payload: id });
+  };
+
   return (
     <TodoAppContext.Provider
       value={{
@@ -59,7 +71,10 @@ export const TodoAppContextProvider = ({ children }) => {
         registerDeleteInfo,
         changeAlertShow,
         modifyTodo,
-        toggleTodoComplete
+        toggleTodoComplete,
+        clearCompleteTodo,
+        deleteTodo,
+        registerEditID,
       }}
     >
       {children}

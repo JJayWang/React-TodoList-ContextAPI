@@ -4,9 +4,8 @@ import { useContext } from "react";
 import { TodoAppContext } from "../../contexts/todo-app-context";
 import { toast } from "react-toastify";
 
-const Form = ({ todoData, handleSubmitData }) => {
+const Form = () => {
   const { categorys, todo, editID, modifyTodo } = useContext(TodoAppContext);
-  console.log(todo);
 
   let contentData = "";
 

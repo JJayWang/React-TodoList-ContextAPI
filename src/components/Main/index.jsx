@@ -1,22 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import Home from "../Home";
-import Edit from "../Edit";
 import List from "../List";
 import Category from "../Category";
 import Done from "../Done";
 import { Routes, Route, useLocation } from "react-router-dom";
 
-export default function Main({
-  // todoList,
-  // addTodo,
-  // updateTodoList,
-  // toggleTodoComplete,
-  // clearCompleteTodo,
-  // addCategory,
-  // handleDeleteClick,
-}) {
+export default function Main() {
   const location = useLocation();
   return (
     <div className="wrapper">
@@ -60,46 +50,9 @@ export default function Main({
       <main>
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
-          <Route
-            path="Edit/:id"
-            element={
-              <Edit
-                //categorys={categorys}
-                //todoList={todoList}
-                //updateTodoList={updateTodoList}
-              ></Edit>
-            }
-          ></Route>
-          <Route
-            path="List"
-            element={
-              <List
-                //todoList={todoList.filter((item) => !item.done)}
-                //toggleTodoComplete={toggleTodoComplete}
-                //handleDeleteClick={handleDeleteClick}
-              ></List>
-            }
-          ></Route>
-          <Route
-            path="Done"
-            element={
-              <Done
-                // completeList={todoList.filter((item) => item.done)}
-                // toggleTodoComplete={toggleTodoComplete}
-                // clearCompleteTodo={clearCompleteTodo}
-              ></Done>
-            }
-          ></Route>
-          <Route
-            path="Category"
-            element={
-              <Category
-                //categorys={categorys}
-                //addCategory={addCategory}
-                //handleDeleteClick={handleDeleteClick}
-              ></Category>
-            }
-          ></Route>
+          <Route path="List" element={<List></List>}></Route>
+          <Route path="Done" element={<Done></Done>}></Route>
+          <Route path="Category" element={<Category></Category>}></Route>
           <Route
             path="*"
             element={<h2 style={{ color: "#ad8002" }}>Page not found!</h2>}

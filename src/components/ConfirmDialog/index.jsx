@@ -4,16 +4,24 @@ import { TodoAppContext } from "../../contexts/todo-app-context";
 import "./index.css";
 import { toast } from "react-toastify";
 
-export default function ConfirmDialog({ info, handleDialogClick }) {
+export default function ConfirmDialog() {
   const contextData = useContext(TodoAppContext);
-  const { alertShow, deleteInfo, changeAlertShow, deleteCategory, todo } =
-    contextData;
+  const {
+    alertShow,
+    deleteInfo,
+    changeAlertShow,
+    deleteCategory,
+    todo,
+    deleteTodo,
+  } = contextData;
   let name = "";
   if (alertShow) {
     switch (deleteInfo.type) {
       case "todo":
-        //const deleteTodo = todoList.find((item) => item.id === deleteInfo.id);
-        //name = deleteTodo.content;
+        const deleteTodo = todo.find((item) => item.id === deleteInfo.id);
+        if (deleteTodo) {
+          name = deleteTodo.content;
+        }
         break;
       case "category":
         const { categorys } = contextData;
@@ -41,7 +49,7 @@ export default function ConfirmDialog({ info, handleDialogClick }) {
           <div className="icon">
             <i className="fa-solid fa-circle-exclamation"></i>
           </div>
-          <div className="text">{name}</div>
+          <div className="text">Check to delete {name} ?</div>
         </div>
         <div className="footer">
           <div
@@ -61,7 +69,9 @@ export default function ConfirmDialog({ info, handleDialogClick }) {
                     toast.warn("Data can not delete!");
                   }
                   break;
-                default:
+                case "todo":
+                  deleteTodo(deleteInfo.id);
+                  toast.success("Data has been deleted!");
                   break;
               }
             }}

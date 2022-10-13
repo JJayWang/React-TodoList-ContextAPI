@@ -5,7 +5,14 @@ import { useContext } from "react";
 import { TodoAppContext } from "../../contexts/todo-app-context";
 
 const List = () => {
-  const { categorys, todo, toggleTodoComplete } = useContext(TodoAppContext);
+  const {
+    categorys,
+    todo,
+    toggleTodoComplete,
+    registerDeleteInfo,
+    changeAlertShow,
+    registerEditID,
+  } = useContext(TodoAppContext);
   const [searchType, setSearchType] = useState("");
   const [searchWord, setSearchWord] = useState("");
 
@@ -16,7 +23,7 @@ const List = () => {
     };
   }, {});
 
-  let searchList = todo.filter(item=>!item.done);
+  let searchList = todo.filter((item) => !item.done);
   if (searchType !== "") {
     searchList = searchList.filter((item) => item.category === searchType);
   }
@@ -66,7 +73,13 @@ const List = () => {
             </div>
             <div className="todo-name">{todo.content}</div>
             <div className="todo-icon">
-              <Link to={`../Edit/${todo.id}`}>
+              <Link
+                to={`../`}
+                onClick={() => {
+                  registerEditID(todo.id);
+                }}
+                title="edit"
+              >
                 <i className="fa-solid fa-pen"></i>
               </Link>
               <Link
@@ -74,14 +87,17 @@ const List = () => {
                 onClick={() => {
                   toggleTodoComplete(todo.id);
                 }}
+                title="complete"
               >
                 <i className="fa-solid fa-circle-check"></i>
               </Link>
               <Link
                 to="#"
                 onClick={() => {
-                  //handleDeleteClick(todo.id, "todo");
+                  changeAlertShow(true);
+                  registerDeleteInfo({ type: "todo", id: todo.id });
                 }}
+                title="delete"
               >
                 <i className="fa-solid fa-trash-can"></i>
               </Link>

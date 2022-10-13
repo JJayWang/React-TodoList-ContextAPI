@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid";
 const todoAppReducer = (state, action) => {
-  //console.log(state, action);
   switch (action.type) {
     case "modifyTodo":
       const { editID } = state;
@@ -29,8 +28,6 @@ const todoAppReducer = (state, action) => {
       const newTodoList = [...todo];
       const toggleTodo = newTodoList.find((item) => item.id === action.payload);
       toggleTodo.done = !toggleTodo.done;
-      console.log("2", toggleTodo);
-      console.log("3", newTodoList);
       return { ...state, todo: newTodoList };
     case "addCategory":
       const newCateoryList = [
@@ -42,6 +39,12 @@ const todoAppReducer = (state, action) => {
         },
       ];
       return { ...state, categorys: newCateoryList };
+    case "deleteTodo": {
+      const newTodoList = [...state.todo].filter(
+        (item) => item.id !== action.payload
+      );
+      return { ...state, todo: newTodoList };
+    }
     case "deleteCategory":
       const newCategoryList = state.categorys.filter(
         (item) => item.id !== action.payload
@@ -49,8 +52,15 @@ const todoAppReducer = (state, action) => {
       return { ...state, categorys: newCategoryList };
     case "registerDeleteInfo":
       return { ...state, deleteInfo: action.payload };
+    case "registerEditID":
+      return { ...state, editID: action.payload };
     case "changeAlertShow":
       return { ...state, alertShow: action.payload };
+    case "clearCompleteTodo": {
+      let newTodoList = [...state.todo];
+      newTodoList = newTodoList.filter((item) => !item.done);
+      return { ...state, todo: newTodoList };
+    }
     default:
       return state;
   }

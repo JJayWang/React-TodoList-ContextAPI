@@ -2,16 +2,11 @@ import React, { useState } from "react";
 import { TodoAppContext } from "../../contexts/todo-app-context";
 import { useContext } from "react";
 
-const Category = ({
-  //categorys,
-  handleDeleteClick,
-}) => {
-  const { categorys, addCategory, registerDeleteInfo, changeAlertShow } =
-    useContext(TodoAppContext);
+const Category = () => {
+  const { categorys, addCategory, registerDeleteInfo, changeAlertShow } = useContext(TodoAppContext);
   const [category, setCategory] = useState("");
 
   const handleCatetoryCheck = () => {
-    //addCategory(category);
     addCategory(category);
     setCategory("");
   };
@@ -41,7 +36,6 @@ const Category = ({
               <div
                 className="category-delete"
                 onClick={() => {
-                  //handleDeleteClick(item.id, "category");
                   changeAlertShow(true);
                   registerDeleteInfo({
                     id: item.id,
